@@ -1,23 +1,21 @@
 #!/usr/bin/env node
+const fs = require("fs");
+const fileList = [".editorconfig"];
 
-const fs = require('fs');
-
-const text = `# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors or IDEs
-# http://editorconfig.org
-root = true
-
-[*]
-indent_style = space
-indent_size = 2
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[*.md]
-trim_trailing_whitespace = false
-`;
-
-// Path: .editorconfig
-fs.writeFileSync('.editorconfig', text);
+fileList.forEach((file) => {
+  const url = `https://cdn.jsdelivr.net/gh/Zzrk/configs/${file}`;
+  fetch(url)
+    .then((res) => res.text())
+    .then((text) => {
+      fs.writeFile(file, text, (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log(`Downloaded ${file}`);
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
