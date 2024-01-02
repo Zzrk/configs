@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const fs = require("fs");
-const fileList = [".editorconfig, .eslintrc.yml"];
+const fileList = [".editorconfig", ".eslintrc.yml"];
 
 fileList.forEach((file) => {
   const url = `https://cdn.jsdelivr.net/gh/Zzrk/configs/${file}`;
